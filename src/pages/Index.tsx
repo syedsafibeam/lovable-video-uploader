@@ -53,7 +53,6 @@ const Index = () => {
   const [taskId, setTaskId] = useState(null);
   const [responseData, setResponseData] = useState(null);
   const [responseDataLoading, setResponseDataLoading] = useState(false);
-  const [videoData, setVideoData] = useState(null);
   const [videoDataEl, setVideoDataEl] = useState(null);
 
   let interval = null;
@@ -104,7 +103,6 @@ const Index = () => {
   };
 
   const pollTaskData = async (currTaskId) => {
-    console.log(taskId, responseData);
     if (currTaskId && !responseData) {
       try {
         const response = await axios.get(
@@ -180,7 +178,7 @@ const Index = () => {
 
         interval = setInterval(() => {
           pollTaskData(res1.upstreamResponse[0].id);
-        }, 5000);
+        }, 10000);
       }
     };
     if (videoDataEl) {
@@ -215,8 +213,22 @@ const Index = () => {
                 </Card>
               </>
             ) : (
-              <Card className="shadow-medium overflow-hidden border-border/50">
-                <ReactMarkdown>{responseData}</ReactMarkdown>
+              <Card className="shadow-medium overflow-hidden border-border/50 p-4">
+                <p
+                  style={{
+                    fontSize: "20px",
+                    marginBottom: "20px",
+                    fontWeight: "600",
+                  }}
+                >
+                  Score:{" "}
+                  <span
+                    style={{ color: responseData.score > 80 ? "Green" : "Red" }}
+                  >
+                    {responseData.score > 80 ? "Good" : "Bad"}
+                  </span>
+                </p>
+                <ReactMarkdown>{responseData.summary}</ReactMarkdown>
               </Card>
             )}
           </>
