@@ -16,7 +16,7 @@ import {
 import ReactMarkdown from "react-markdown";
 
 const API_ENDPOINT_TWELVELABS = "https://api.twelvelabs.io/v1.3/tasks";
-const API_ENDPOINT_BEAM = "http://localhost:3005";
+const API_ENDPOINT_BEAM = "https://hackathon-be-sepia.vercel.app";
 
 const sendDataToBeam = async (data, niche) => {
   let res = null;
